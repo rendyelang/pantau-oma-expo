@@ -40,6 +40,7 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     Poppins_400Regular,
     Poppins_500Medium,
+    // Poppins_600SemiBold,
     Poppins_700Bold,
   });
 
