@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
-export interface DummyData {
+interface SimulationData {
   bpm: number;
   activity: "Sitting" | "Walking" | "Sleeping";
   battery: number;
   isConnected: boolean;
   situation: "safe" | "danger";
+  resetToSafe: () => void;
+  triggerDanger: () => void;
 }
 
-export function useDummyData() {
-  const [data, setData] = useState<DummyData>({
+const SimulationContext = createContext<SimulationData | undefined>(undefined);
+
+export function SimulationProvider({ children }: { children: React.ReactNode }) {
+  const [data, setData] = useState<Omit<SimulationData, "resetToSafe" | "triggerDanger">>({
     bpm: 80,
     activity: "Sitting",
     battery: 75,
@@ -18,13 +22,14 @@ export function useDummyData() {
   });
 
   const resetToSafe = () => setData((prev) => ({ ...prev, situation: "safe" }));
+  const triggerDanger = () => setData((prev) => ({ ...prev, situation: "danger" }));
 
   useEffect(() => {
     const interval = setInterval(() => {
       setData((prev) => {
         const bpm = Math.floor(Math.random() * (100 - 60 + 1) + 60);
 
-        const activities: DummyData["activity"][] = ["Sitting", "Walking", "Sleeping"];
+        const activities: ("Sitting" | "Walking" | "Sleeping")[] = ["Sitting", "Walking", "Sleeping"];
         const activity = Math.random() > 0.8 ? activities[Math.floor(Math.random() * activities.length)] : prev.activity;
 
         let battery = prev.battery - 1;
@@ -32,7 +37,7 @@ export function useDummyData() {
 
         const isConnected = Math.random() > 0.05;
 
-        // Keep existing situation, don't change randomly
+        // Keep existing situation
         const situation = prev.situation;
 
         return {
@@ -48,5 +53,13 @@ export function useDummyData() {
     return () => clearInterval(interval);
   }, []);
 
-  return { ...data, resetToSafe };
+  return <SimulationContext.Provider value={{ ...data, resetToSafe, triggerDanger }}>{children}</SimulationContext.Provider>;
+}
+
+export function useSimulation() {
+  const context = useContext(SimulationContext);
+  if (!context) {
+    throw new Error("useSimulation must be used within a SimulationProvider");
+  }
+  return context;
 }
