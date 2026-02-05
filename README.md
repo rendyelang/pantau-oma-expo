@@ -8,6 +8,11 @@
     <b>"Pantau orang tua tercinta, kapan saja, di mana saja."</b>
   </p>
 </div>
+<div align="center">
+  <a href="https://github.com/YOUR_USERNAME/pantau-oma/releases/download/v1.0.0-demo/NamaFileApkLu.apk">
+    <img src="https://img.shields.io/badge/Download_APK-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Download APK" />
+  </a>
+</div>
 
 ---
 
