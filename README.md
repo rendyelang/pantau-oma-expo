@@ -1,50 +1,67 @@
-# Welcome to your Expo app 👋
+# 👵 PantauOma - Elderly Monitoring System
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<div align="center">
+  <img src="./assets/icons/pantauoma.png" alt="PantauOma Logo" width="180" />
+  <br />
+  <br />
+  <p>
+    <b>"Pantau orang tua tercinta, kapan saja, di mana saja."</b>
+  </p>
+</div>
 
-## Get started
+---
 
-1. Install dependencies
+PantauOma adalah aplikasi mobile berbasis **Internet of Things (IoT)** yang dirancang untuk memantau keselamatan lansia secara real-time. Aplikasi ini terintegrasi dengan perangkat wearable untuk mendeteksi lokasi, detak jantung, aktivitas user dan insiden jatuh (fall detection) menggunaka algoritma Random Forest. (IoT & AI masih dalam pengembangan)
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## 📱 Demo & Screenshots
 
-   ```bash
-   npx expo start
-   ```
+### Live Demo
+Video demo penggunaan aplikasi dapat dilihat melalui link berikut:
 
-In the output, you'll find options to open the app in a
+### [▶️ Tonton Video Demo (Google Drive)](https://drive.google.com/file/d/1XSpqkAtIVNqIEo5XyNafp79Hvc3C1UGs/view?usp=sharing)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Gallery
+| Home (Safe Condition) | Home (Danger Alert) | History Page | Profile Page |
+|:---:|:---:|:---:|:---:|
+| <img src="./assets/images/screenshots/home_safe.png" width="200" /> | <img src="./assets/images/screenshots/home_danger.png" width="200" /> | <img src="./assets/images/screenshots/history.jpeg" width="200" /> | <img src="./assets/images/screenshots/profile.png" width="200" /> |
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## ⚙️ System Architecture
 
-When you're ready, run:
+Berikut adalah alur data bagaimana PantauOma bekerja, mulai dari sensor wearable hingga notifikasi di HP anak/wali.
 
-```bash
-npm run reset-project
-```
+![System Architecture](./assets/images/screenshots/flowchart.png)
+---
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🚀 Key Features
 
-## Learn more
+* **📍 Live Location Tracking:** Melacak posisi lansia secara real-time menggunakan peta interaktif (Leaflet/Google Maps).
+* **❤️ Health Monitoring:** Menampilkan detak jantung (BPM) dan status aktivitas (Duduk/Berjalan).
+* **⚠️ Fall Detection Alert:** Notifikasi instan layar merah "Danger" ketika perangkat mendeteksi lansia terjatuh.
+* **🔋 Device Status:** Memantau persentase baterai perangkat wearable dan koneksi Wi-Fi.
+* **🌙 Offline Mode:** Data tersimpan lokal menggunakan **SQLite**, memungkinkan riwayat tetap bisa diakses tanpa internet.
+* **🎨 Glassmorphism UI:** Tampilan modern dengan efek blur native dan animasi halus.
 
-To learn more about developing your project with Expo, look at the following resources:
+---
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 🛠️ Tech Stack
 
-## Join the community
+**Mobile Framework:**
+* ![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) **Expo SDK 50+**
+* ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+* **NativeWind v4** (TailwindCSS for Native)
 
-Join our community of developers creating universal apps.
+**Native Modules:**
+* `expo-sqlite` (Local Database)
+* `expo-blur` (Glass UI Effect)
+* `react-native-maps` / `react-native-webview` (Mapping)
+* `expo-location` (GPS)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+**Backend & Services:**
+* ![Firebase](https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black) (Realtime Database & Auth)
+* **Google Maps API** / **OpenStreetMap**
+
+---
