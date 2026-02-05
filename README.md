@@ -9,7 +9,7 @@
   </p>
 </div>
 <div align="center">
-  <a href="https://github.com/YOUR_USERNAME/pantau-oma/releases/download/v1.0.0-demo/NamaFileApkLu.apk">
+  <a href="https://github.com/rendyelang/pantau-oma-expo/releases/download/v1.0.0-demo/pantauoma.apk">
     <img src="https://img.shields.io/badge/Download_APK-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Download APK" />
   </a>
 </div>
