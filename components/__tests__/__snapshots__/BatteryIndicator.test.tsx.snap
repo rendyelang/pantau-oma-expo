@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BatteryIndicator renders correctly with 10% battery (Red) 1`] = `
+<View
+  className="w-full h-2 bg-gray-200 rounded-full mt-2 overflow-hidden"
+>
+  <View
+    className="h-full bg-red-500"
+    style={
+      {
+        "width": "10%",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`BatteryIndicator renders correctly with 40% battery (Yellow) 1`] = `
+<View
+  className="w-full h-2 bg-gray-200 rounded-full mt-2 overflow-hidden"
+>
+  <View
+    className="h-full bg-yellow-500"
+    style={
+      {
+        "width": "40%",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`BatteryIndicator renders correctly with 80% battery (Green) 1`] = `
+<View
+  className="w-full h-2 bg-gray-200 rounded-full mt-2 overflow-hidden"
+>
+  <View
+    className="h-full bg-green-500"
+    style={
+      {
+        "width": "80%",
+      }
+    }
+  />
+</View>
+`;
