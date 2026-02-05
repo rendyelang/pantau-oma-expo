@@ -6,7 +6,7 @@ import StatusCard from "@/components/StatusCard";
 import { UserGreetings } from "@/components/UserGreetings";
 // import { useDummyData } from "@/hooks/useDummyData";
 import { useSimulation } from "@/context/SimulationContext";
-import { ImageBackground, ScrollView, Text, View } from "react-native";
+import { ImageBackground, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import BatteryIcon from "@/assets/icons/battery.svg";
@@ -15,7 +15,7 @@ import WifiIcon from "@/assets/icons/wifi.svg";
 import LiveMapLeaflet from "@/components/LiveMapLeaflet";
 
 export default function HomeScreen() {
-  const { bpm, activity, battery, isConnected } = useSimulation();
+  const { bpm, activity, battery, isConnected, triggerDanger } = useSimulation();
 
   // Logic rendering danger sekarang dipindah ke _layout.tsx via routing
 
@@ -58,6 +58,13 @@ export default function HomeScreen() {
 
             {/* Connection Status */}
             <StatusCard label={isConnected ? "Connected" : "Disconnected"} Icon={WifiIcon} variant={isConnected ? "success" : "neutral"} />
+          </View>
+
+          {/* Simulation Controls */}
+          <View className="mt-8 mb-8">
+            <TouchableOpacity onPress={triggerDanger} className="bg-red-500 py-4 rounded-xl items-center shadow-lg active:bg-red-600">
+              <Text className="text-white font-poppins-bold text-lg">⚠️ Simulate Danger</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

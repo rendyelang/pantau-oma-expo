@@ -14,7 +14,7 @@ export function useDummyData() {
     activity: "Sitting",
     battery: 75,
     isConnected: true,
-    situation: "danger",
+    situation: "safe",
   });
 
   const resetToSafe = () => setData((prev) => ({ ...prev, situation: "safe" }));

@@ -1,10 +1,9 @@
 import DangerIcon from "@/assets/icons/danger.svg";
 import HeroDanger from "@/assets/images/hero_danger.png";
-import React from "react";
-import { ImageBackground, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { getContacts } from "@/services/database";
+import React, { useEffect, useState } from "react";
+import { Alert, ImageBackground, Linking, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-// import ActionButtons from "./ActionButtons";
-// import LiveMapLeaflet from "./LiveMapLeaflet";
 import ActionButtons from "./ActionButtons";
 import LiveMapLeaflet from "./LiveMapLeaflet";
 import { UserGreetings } from "./UserGreetings";
@@ -14,6 +13,38 @@ interface DangerStateProps {
 }
 
 export default function DangerState({ onReset }: DangerStateProps) {
+  const [omaContact, setOmaContact] = useState<{ name: string; phone: string } | null>(null);
+  const [ambulanceContact, setAmbulanceContact] = useState<{ name: string; phone: string } | null>(null);
+
+  useEffect(() => {
+    loadContacts();
+  }, []);
+
+  const loadContacts = async () => {
+    const contacts = await getContacts();
+    const oma = contacts.find((c) => c.id === "oma");
+    const ambulance = contacts.find((c) => c.id === "ambulance");
+
+    if (oma) setOmaContact({ name: oma.name, phone: oma.phone });
+    if (ambulance) setAmbulanceContact({ name: ambulance.name, phone: ambulance.phone });
+  };
+
+  const handleCall = async (phone?: string) => {
+    if (!phone) {
+      Alert.alert("No Number Found", "Please setup the emergency contact number in settings first.");
+      return;
+    }
+
+    const url = `tel:${phone}`;
+    try {
+      // Direct openURL call as canOpenURL often fails on Android 11+ without Manifest changes
+      await Linking.openURL(url);
+    } catch (err) {
+      Alert.alert("Error", "Could not open dialer.");
+      console.error("Error opening dialer:", err);
+    }
+  };
+
   return (
     <SafeAreaView className="flex-1">
       <ScrollView className="relative">
@@ -37,7 +68,12 @@ export default function DangerState({ onReset }: DangerStateProps) {
 
           {/* Action Buttons */}
           <Text className="text-xl font-poppins-bold">Action Button</Text>
-          <ActionButtons />
+          <ActionButtons
+            onCallOma={() => handleCall(omaContact?.phone)}
+            onCallAmbulance={() => handleCall(ambulanceContact?.phone)}
+            omaName={omaContact ? `Call ${omaContact.name}` : undefined}
+            ambulanceName={ambulanceContact ? `Call ${ambulanceContact.name}` : undefined}
+          />
 
           {/* Live Location */}
           <Text className="text-xl font-poppins-bold">Oma Live Location</Text>
